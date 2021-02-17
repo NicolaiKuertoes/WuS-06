@@ -47,10 +47,12 @@ def kontingenztafel_test(kontingenztafel: [[float]]) -> Tuple[float, float, floa
     # empty array for expected values
     exp = []
     
-    # calculate expected values and add them to exp
+    # calculate expected values and add them to exp ------------------------------ TODO: FIX BUG
     for i in range(len(kontingenztafel)):
         for k in range(len(kontingenztafel)):
             exp.append((obs_sum_rows[i] * obs_sum_cols[k]) / obs_total)
+            
+    # print(exp) # --------------------------------------------------------------- Test
             
     # convert exp to numpy array for convenience
     exp = np.array(exp)
@@ -63,7 +65,7 @@ def kontingenztafel_test(kontingenztafel: [[float]]) -> Tuple[float, float, floa
 
 
 # Aufruf mit Beispiel aus der Vorlesung
-pruefgroesse, freiheitsgrade, p_Wert = kontingenztafel_test([[17, 38], [18, 7]])
+#pruefgroesse, freiheitsgrade, p_Wert = kontingenztafel_test([[17, 38], [18, 7]])
 # Ausgabe der Werte
 print(pruefgroesse, freiheitsgrade, p_Wert)
 

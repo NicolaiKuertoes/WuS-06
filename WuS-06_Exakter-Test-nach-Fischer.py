@@ -9,19 +9,17 @@ def fisher_exakt(vierfeldertafel) -> float:
     Returns:
         p_Wert          -- Der p-Wert 
     '''
-    # YOUR CODE HERE
     
     p_Wert = 0
+    
+    # YOUR CODE HERE
     
     # lists to store left and right P-Values
     p_Left = []
     p_Right = []
     
-    # write all values in a single list for convenience
-    vft = []
-    for i in range(len(vierfeldertafel)):
-        for k in range(len(vierfeldertafel[0])):
-            vft.append(vierfeldertafel[i][k])
+    # write all values in a single list for convenience e.g. [[4,1], [2,2]] --> [4,1,2,2]
+    vft = [vierfeldertafel[i][k] for i in range(len(vierfeldertafel)) for k in range(len(vierfeldertafel[0]))]
     
     # calculate the probability of given contingency table ---------------------- HELPER
     def P(vft_tmp: [float]) -> float:
@@ -32,6 +30,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     # calculate probability of contingency tables to the left
     def fisher_left(vft_in: [float]):
         vft_out = [i for i in vft_in] # can't write "vft_out = vft_in" --> idk why, but it would change my vft 
+        vft_min = vft_out.index(min(vft_out))
         while not 0 in vft_out:
             vft_out[0] += 1
             vft_out[1] -= 1
@@ -48,7 +47,7 @@ def fisher_exakt(vierfeldertafel) -> float:
             vft_out[2] += 1
             vft_out[3] -= 1
             p_Right.append(P(vft_out))
-    
+
     # get the starting P-Value
     p_Start = P(vft)
     
@@ -69,10 +68,12 @@ def fisher_exakt(vierfeldertafel) -> float:
     return p_Wert
 
 
-# YOUR CODE HERE
-  
-vierfeldertafel = [[4, 1],[2, 2]]
+# YOUR CODE HERE --- added some custom contingency tables for testing
 #vierfeldertafel = [[4, 1],[1, 4]]
 #vierfeldertafel = [[18, 2],[11, 9]]
 
-fisher_exakt(vierfeldertafel), stats.fisher_exact(vierfeldertafel)
+# given contingency table
+vierfeldertafel = [[4, 1],[2, 2]]
+
+# show my value vs pythons value
+fisher_exakt(vierfeldertafel), stats.fisher_exact(vierfeldertafel)[1]

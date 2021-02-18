@@ -21,7 +21,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     # write all values in a single list for convenience e.g. [[4,1], [2,2]] --> [4,1,2,2]
     vft = [vierfeldertafel[i][k] for i in range(len(vierfeldertafel)) for k in range(len(vierfeldertafel[0]))]
     
-    # calculate the probability of given contingency table ---------------------- HELPER
+    # calculate the probability of given contingency table
     def P(vft_tmp: [float]) -> float:
         n_vft = sum(vft_tmp)
         return (math.factorial(vft_tmp[0]+vft_tmp[1])*math.factorial(vft_tmp[2]+vft_tmp[3])*math.factorial(vft_tmp[0]+vft_tmp[2])*math.factorial(vft_tmp[1]+vft_tmp[3]))\

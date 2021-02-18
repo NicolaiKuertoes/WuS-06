@@ -78,3 +78,4 @@ vierfeldertafel = [[4, 1],[2, 2]]
 #vierfeldertafel = [[18, 2],[11, 9]]
 
 fisher_exakt(vierfeldertafel), stats.fisher_exact(vierfeldertafel)
+

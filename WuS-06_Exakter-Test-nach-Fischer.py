@@ -31,7 +31,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     
     # calculate probability of contingency tables to the left
     def fisher_left(vft_in: [float]):
-        vft_out = [i for i in vft_in]
+        vft_out = [i for i in vft_in] # can't write "vft_out = vft_in" --> idk why, but it would change my vft 
         vft_min = vft_out.index(min(vft_out))
         while not 0 in vft_out:
             vft_out[0] += 1
@@ -42,7 +42,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     
     # calculate probability of contingency tables to the right
     def fisher_right(vft_in: [float]):
-        vft_out = [i for i in vft_in]
+        vft_out = [i for i in vft_in] # can't write "vft_out = vft_in" --> idk why, but it would change my vft
         vft_max = vft_out.index(max(vft_out))
         while not 0 in vft_out:
             vft_out[0] -= 1
@@ -78,4 +78,3 @@ vierfeldertafel = [[4, 1],[2, 2]]
 #vierfeldertafel = [[18, 2],[11, 9]]
 
 fisher_exakt(vierfeldertafel), stats.fisher_exact(vierfeldertafel)
-

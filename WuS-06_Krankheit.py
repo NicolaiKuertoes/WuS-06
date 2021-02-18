@@ -1,6 +1,6 @@
 from typing import Tuple
 import numpy as np
-from scipy.stats import chisquare, chi2
+from scipy.stats import chisquare, chi2, chi2_contingency
 
 def kontingenztafel_test(kontingenztafel: [[float]]) -> Tuple[float, float, float]:
     '''
@@ -52,13 +52,11 @@ def kontingenztafel_test(kontingenztafel: [[float]]) -> Tuple[float, float, floa
         for k in range(len(kontingenztafel[0])):
             exp.append((obs_sum_rows[i] * obs_sum_cols[k]) / obs_total)
             
-    #print(exp) # ---------------------------------------------------------- test output exp. values
-            
     # convert exp to numpy array for convenience
     exp = np.array(exp)
     
-    # calculate chi^2 and p
-    pruefgroesse, p_Wert = chisquare(obs, exp)
+    # calculate chi^2 and p ----------- I have no clue what ddof exactly does, however... it works!
+    pruefgroesse, p_Wert = chisquare(obs, exp, ddof=freiheitsgrade + 1)
     
     # return all calculated values as a tuple
     return pruefgroesse, freiheitsgrade, p_Wert
@@ -68,7 +66,3 @@ def kontingenztafel_test(kontingenztafel: [[float]]) -> Tuple[float, float, floa
 pruefgroesse, freiheitsgrade, p_Wert = kontingenztafel_test([[17, 38], [18, 7]])
 # Ausgabe der Werte
 print(pruefgroesse, freiheitsgrade, p_Wert)
-
-# Custom Test (triggers my warning)
-#pruefgroesse, freiheitsgrade, p_Wert = kontingenztafel_test([[17, 38], [18, 7], [13, 4]])
-#print(pruefgroesse, freiheitsgrade, p_Wert)

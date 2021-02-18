@@ -24,7 +24,7 @@ def kontingenztafel_test(kontingenztafel: [[float]]) -> Tuple[float, float, floa
     for cell in kontingenztafel:
         for value in cell:
             if not value >= 5:
-                print('Warnung: Die Aussagekraft des Test ist ungenau, da nicht alle Werte größer oder gleich 5 sind!')
+                print('Die Prüfgröße kann nicht als chi^2-verteilt angesehen werden, da nicht alle Werte größer oder gleich 5 sind.')
     
     # convert kontingenztafel to numpy array for convenience
     kontingenztafel = np.array(kontingenztafel)
@@ -52,7 +52,7 @@ def kontingenztafel_test(kontingenztafel: [[float]]) -> Tuple[float, float, floa
         for k in range(len(kontingenztafel[0])):
             exp.append((obs_sum_rows[i] * obs_sum_cols[k]) / obs_total)
             
-    print(exp)
+    #print(exp) # ---------------------------------------------------------- test output exp. values
             
     # convert exp to numpy array for convenience
     exp = np.array(exp)
@@ -70,5 +70,5 @@ pruefgroesse, freiheitsgrade, p_Wert = kontingenztafel_test([[17, 38], [18, 7]])
 print(pruefgroesse, freiheitsgrade, p_Wert)
 
 # Custom Test (triggers my warning)
-#pruefgroesse, freiheitsgrade, p_Wert = kontingenztafel_test([[17, 38, 50], [18, 7, 8], [13, 4, 17]])
+#pruefgroesse, freiheitsgrade, p_Wert = kontingenztafel_test([[17, 38], [18, 7], [13, 4]])
 #print(pruefgroesse, freiheitsgrade, p_Wert)

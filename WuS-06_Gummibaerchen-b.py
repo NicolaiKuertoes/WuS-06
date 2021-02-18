@@ -1,12 +1,14 @@
 import pandas as pd
 
-h0 =  int(750 / 6)
-gummibaerchen = {
+# simple calculation of expected values
+exp =  int(750 / 6)
+
+# create a pandas DataFrame
+gummibaerchen = pd.DataFrame({
     'Sorte': ['Ananas', 'Himbeer', 'Apfel', 'Erdbeere', 'Orange', 'Zitrone'],
     'Beobachtet': [135, 114, 130, 141, 105, 125],
-    'Erwartet': [h0]*6
-}
+    'Erwartet': [exp]*6
+})
 
-gummibaerchen = pd.DataFrame(gummibaerchen)
-
+# show the dataframe
 gummibaerchen

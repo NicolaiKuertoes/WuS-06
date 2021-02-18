@@ -54,9 +54,8 @@ def fisher_exakt(vierfeldertafel) -> float:
     # get the starting P-Value
     p_Start = P(vft)
     
-    # get all P-Values of the left side
+    # get all P-Values of the left side then reverse the list for visual convenience
     fisher_left(vft)
-    # reverse left P-Values list
     p_Left.reverse()
     
     # get all P-Values of the right side

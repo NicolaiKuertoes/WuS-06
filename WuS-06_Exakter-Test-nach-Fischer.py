@@ -59,7 +59,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     fisher_right(vft)
     
     # concatenate all P-Values from left to right
-    p_Werte = sum([p_Left, [P(vft)] ,p_Right], [])
+    p_Werte = sum([p_Left, [p_Start] ,p_Right], [])
     
     # calculate the single P Value
     p_Wert = sum([i for i in p_Werte if i <= p_Start])

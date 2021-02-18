@@ -10,7 +10,7 @@ untereGrenze = chi2.ppf(q = alpha, df = 5)
 obereGrenze = chi2.ppf(q = 1 - alpha, df = 5)
 
 # check if 𝜒2 exceeds the boundaries
- h0angenommen = untereGrenze <= chi <= obereGrenze
+h0angenommen = untereGrenze <= chi <= obereGrenze
 
 print('Die Grenzen für den Annahmebereich sind ({:.2f}, {:.2f})'.format(untereGrenze, obereGrenze))
 if h0angenommen:

@@ -74,7 +74,7 @@ def fisher_exakt(vierfeldertafel) -> float:
 
 # YOUR CODE HERE
   
-#vierfeldertafel = [[4, 1],[2, 2]]
+vierfeldertafel = [[4, 1],[2, 2]]
 #vierfeldertafel = [[4, 1],[1, 4]]
 #vierfeldertafel = [[18, 2],[11, 9]]
 

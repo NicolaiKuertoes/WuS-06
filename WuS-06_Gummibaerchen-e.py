@@ -27,8 +27,7 @@ plt.ylabel('y')
 plt.title('$\chi^2$ Verteilung mit Annahmebereich')
 
 # Set label locations.
-plt.xticks(np.arange(0, 21, step=1))
-plt.yticks(np.arange(0, 0.2, step=.01))
+plt.xticks(ticks=[untereGrenze, chi, obereGrenze])
 
 # configure the grid lines
 plt.grid()

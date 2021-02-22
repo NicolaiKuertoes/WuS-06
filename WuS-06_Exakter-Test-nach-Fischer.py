@@ -21,27 +21,11 @@ def fisher_exakt(vierfeldertafel) -> float:
     # write all values in a single list for convenience e.g. [[4,1], [2,2]] --> [4,1,2,2]
     vft = [vierfeldertafel[i][k] for i in range(len(vierfeldertafel)) for k in range(len(vierfeldertafel[0]))]
     
-    # +++++++++ SPECIAL CASE DETECTION +++++++++
-    '''
-    Checks if any diagonal is already made up of zeros and it's a symmetrical table.
-    
-    Example: [[x, 0],
-              [0, x]]
-    or
-             [[0, x],
-              [x, 0]]
-              
-    Have to return double the P-Value if any diagonal
-    is made up of zeros at the input contingency table (For symmetrical tables only).
-    '''
-    is_Special = ((vft[0] == 0 and vft[3] == 0) and (vft[1] == vft[2])) or ((vft[1] == 0 and vft[2] == 0) and (vft[0] == vft[3]))
-    
     # +++++++++ MY DEBUGGER +++++++++
     '''
     Simply prints out some values to ckeck them.
     '''
     def debug():
-        print("Sonderfall:",is_Special)
         print("Tafeln:", len(p_Werte))
         print("P-Start:", p_Start)
         print("P-Werte:", p_Werte)
@@ -55,7 +39,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     # calculate probability of contingency tables to the left
     def fisher_left(vft_in: [float]):
         vft_out = [i for i in vft_in] # can't write "vft_out = vft_in" --> idk why, but it would change my vft 
-        while not 0 in vft_out:
+        while vft_out[1] > 0 and vft_out[2] > 0:
             vft_out[0] += 1
             vft_out[1] -= 1
             vft_out[2] -= 1
@@ -65,7 +49,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     # calculate probability of contingency tables to the right
     def fisher_right(vft_in: [float]):
         vft_out = [i for i in vft_in] # can't write "vft_out = vft_in" --> idk why, but it would change my vft
-        while not 0 in vft_out:
+        while vft_out[0] > 0 and vft_out[3] > 0:
             vft_out[0] -= 1
             vft_out[1] += 1
             vft_out[2] += 1
@@ -92,13 +76,14 @@ def fisher_exakt(vierfeldertafel) -> float:
     #debug()
     
     # return the resulting P-Value of the two-tailed Fisher exact test
-    return p_Wert * 2 if is_Special else p_Wert
+    return p_Wert
 
 
 # YOUR CODE HERE --- added some custom contingency tables for testing
 #vierfeldertafel = [[4, 1],[1, 4]]
 #vierfeldertafel = [[18, 2],[11, 9]]
 #vierfeldertafel = [[3, 0],[0, 5]]
+#vierfeldertafel = [[0, 5],[2, 5]]
 #vierfeldertafel = [[5, 0],[0, 5]] # Special Case -> Diagonal is already 0 and symmetrical => double p_Wert!
 
 # given contingency table

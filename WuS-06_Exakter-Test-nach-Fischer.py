@@ -32,7 +32,7 @@ def fisher_exakt(vierfeldertafel) -> float:
               [x, 0]]
               
     Have to return double the P-Value if any diagonal
-    is made up of zeros at the input contingency table (For symmetrical Tables only).
+    is made up of zeros at the input contingency table (For symmetrical tables only).
     '''
     is_Special = ((vft[0] == 0 and vft[3] == 0) and (vft[1] == vft[2])) or ((vft[1] == 0 and vft[2] == 0) and (vft[0] == vft[3]))
     

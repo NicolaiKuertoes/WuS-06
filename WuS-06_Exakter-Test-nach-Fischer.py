@@ -23,7 +23,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     
     # +++++++++ SPECIAL CASE DETECTION +++++++++
     '''
-    Checks if any diagonal is already made up of zeros.
+    Checks if any diagonal is already made up of zeros and it's a symmetrical table.
     
     Example: [[x, 0],
               [0, x]]
@@ -32,9 +32,9 @@ def fisher_exakt(vierfeldertafel) -> float:
               [x, 0]]
               
     Have to return double the P-Value if any diagonal
-    is made up of zeros at the input contingency table.
+    is made up of zeros at the input contingency table (For symmetrical Tables only).
     '''
-    is_Special = (vft[0] == 0 and vft[3] == 0) or (vft[1] == 0 and vft[2] == 0)
+    is_Special = ((vft[0] == 0 and vft[3] == 0) and (vft[1] == vft[2])) or ((vft[1] == 0 and vft[2] == 0) and (vft[0] == vft[3]))
     
     # +++++++++ MY DEBUGGER +++++++++
     '''
@@ -98,7 +98,7 @@ def fisher_exakt(vierfeldertafel) -> float:
 # YOUR CODE HERE --- added some custom contingency tables for testing
 #vierfeldertafel = [[4, 1],[1, 4]]
 #vierfeldertafel = [[18, 2],[11, 9]]
-#vierfeldertafel = [[5, 0],[0, 5]] # Special Case -> Diagonal is already 0 => double p_Wert!
+#vierfeldertafel = [[3, 0],[0, 5]] # Special Case -> Diagonal is already 0 => double p_Wert!
 
 # given contingency table
 vierfeldertafel = [[4, 1],[2, 2]]

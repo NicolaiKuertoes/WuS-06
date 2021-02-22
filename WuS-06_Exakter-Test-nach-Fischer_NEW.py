@@ -50,5 +50,6 @@ def fisher_exakt(vierfeldertafel) -> float:
     return p_Wert
 
 # YOUR CODE HERE
-vierfeldertafel = [[5, 0],[0, 5]]
+vierfeldertafel = [[4, 1],
+                   [2, 2]]
 fisher_exakt(vierfeldertafel), stats.fisher_exact(vierfeldertafel)[1]

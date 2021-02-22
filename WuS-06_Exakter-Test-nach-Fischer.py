@@ -98,7 +98,8 @@ def fisher_exakt(vierfeldertafel) -> float:
 # YOUR CODE HERE --- added some custom contingency tables for testing
 #vierfeldertafel = [[4, 1],[1, 4]]
 #vierfeldertafel = [[18, 2],[11, 9]]
-#vierfeldertafel = [[3, 0],[0, 5]] # Special Case -> Diagonal is already 0 => double p_Wert!
+#vierfeldertafel = [[3, 0],[0, 5]]
+#vierfeldertafel = [[5, 0],[0, 5]] # Special Case -> Diagonal is already 0 and symmetrical=> double p_Wert!
 
 # given contingency table
 vierfeldertafel = [[4, 1],[2, 2]]

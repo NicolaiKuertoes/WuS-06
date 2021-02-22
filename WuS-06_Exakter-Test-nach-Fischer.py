@@ -21,6 +21,31 @@ def fisher_exakt(vierfeldertafel) -> float:
     # write all values in a single list for convenience e.g. [[4,1], [2,2]] --> [4,1,2,2]
     vft = [vierfeldertafel[i][k] for i in range(len(vierfeldertafel)) for k in range(len(vierfeldertafel[0]))]
     
+    # +++++++++ SPECIAL CASE DETECTION +++++++++
+    '''
+    Checks if any diagonal is already made up of zeros.
+    
+    Example: [[x, 0],
+              [0, x]]
+    or
+             [[0, x],
+              [x, 0]]
+              
+    Have to return double the P-Value if any diagonal
+    is made up of zeros at the input contingency table.
+    '''
+    is_Special = (vft[0] == 0 and vft[3] == 0) or (vft[1] == 0 and vft[2] == 0)
+    
+    # +++++++++ MY DEBUGGER +++++++++
+    '''
+    Simply prints out some values to ckeck them.
+    '''
+    def debug():
+        print("Sonderfall:",is_Special)
+        print("Tafeln:", len(p_Werte))
+        print("P-Start:", p_Start)
+        print("P-Werte:", p_Werte)
+    
     # calculate the probability of given contingency table
     def P(vft_tmp: [float]) -> float:
         n_vft = sum(vft_tmp)
@@ -30,7 +55,6 @@ def fisher_exakt(vierfeldertafel) -> float:
     # calculate probability of contingency tables to the left
     def fisher_left(vft_in: [float]):
         vft_out = [i for i in vft_in] # can't write "vft_out = vft_in" --> idk why, but it would change my vft 
-        vft_min = vft_out.index(min(vft_out))
         while not 0 in vft_out:
             vft_out[0] += 1
             vft_out[1] -= 1
@@ -64,13 +88,17 @@ def fisher_exakt(vierfeldertafel) -> float:
     # calculate the single P Value
     p_Wert = sum([i for i in p_Werte if i <= p_Start])
     
+    # +++ MY DEBUGGER +++
+    #debug()
+    
     # return the resulting P-Value of the two-tailed Fisher exact test
-    return p_Wert
+    return p_Wert * 2 if is_Special else p_Wert
 
 
 # YOUR CODE HERE --- added some custom contingency tables for testing
 #vierfeldertafel = [[4, 1],[1, 4]]
 #vierfeldertafel = [[18, 2],[11, 9]]
+#vierfeldertafel = [[5, 0],[0, 5]] # Special Case -> Diagonal is already 0 => double p_Wert!
 
 # given contingency table
 vierfeldertafel = [[4, 1],[2, 2]]

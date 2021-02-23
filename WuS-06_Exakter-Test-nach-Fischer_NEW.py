@@ -28,15 +28,15 @@ def fisher_exakt(vierfeldertafel) -> float:
         # run left
         a, b, c, d = vft_in
         while b > 0 and c > 0:
-            a,d = a+1, d+1
-            b,c = b-1, c-1
+            a,b = a+1, b-1
+            c,d = c-1, d+1
             p_Tmp = calc_P([a,b,c,d])
             if p_Tmp <= p_Start : p_List.append(p_Tmp)
         # run right    
         a, b, c, d = vft_in
         while a > 0 and d > 0:
-            a,d = a-1, d-1
-            b,c = b+1, c+1
+            a,b = a-1, b+1
+            c,d = c+1, d-1
             p_Tmp = calc_P([a,b,c,d])
             if p_Tmp <= p_Start : p_List.append(p_Tmp)
         return sum(p_List) + p_Start
@@ -44,7 +44,7 @@ def fisher_exakt(vierfeldertafel) -> float:
     # starting P-Value
     p_Start = calc_P(vft)
     
-    # sum of all P-Values which are smaller than the starting P-Value
+    # P-Value of two-tailed fisher exact test
     p_Wert = runFisher(vft)
     
     return p_Wert
